@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+       <link rel="stylesheet" href="./lib/bootstrap.min.css">
+        <script src="./lib/angular.min.js"></script>
+
+        <script src="pays.js"></script>
+
+
+    </head>
+    <body style="">
+
+        <div ng-app="pays" ng-controller="PaysController as paysCtrl"  class="row" >
+            <!--affichage du tableau cotenatn la liste des pays ainsi que les capitales-->
+
+
+            <div class="col-lg-4 col-lg-offset-1">
+
+                <table class="table table-bordered table-striped table-responsive ">
+                    <caption><h4>La liste des pays</h4></caption>
+                    <thead>
+
+                        <tr class="success">
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                pays
+                            </th>
+                            <th>
+                                Capital
+                            </th>
+                            <th>
+                                action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody >
+                        <tr ng-repeat="p in paysCtrl.countries" >
+                            <td>{{p.id}}</td>
+                            <td>{{p.name}}</td>
+                            <td>{{p.capital}}</td>
+                            <td><a href="#" value="" class=" " ng-click="paysCtrl.deleteItem($index)">delete</a> /
+                                <a href="#" value="" class=" " ng-click="paysCtrl.getItem($index, p)">update</a> </td>
+
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+            <div class="col-lg-4 col-lg-offset-1">
+                <form novalidate>
+                    <fieldset>
+                        <legend>Saisie des données</legend>
+                        <div class="form-group">
+                            <label for="id">ID<span>*</span></label>
+                            <input type="text" ng-model="paysCtrl.country.id" class="form-control input-lg" placeholder="entrer l'id">
+                            <span class="help-block"><em></em></span>
+                            </div>
+                        <div class="form-group" >
+                            <label for="nomPays">Nom Pays <span style="color:red">*</span></label>
+                            <input type="text" ng-model="paysCtrl.country.name" name="nomPays" id="nomPays" value="" class="form-control input-lg" placeholder="saisissez le nom du pays"/>
+                            <span class="help-block"><em></em></span>
+
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="postnomRep">Capital <span style="color:red">*</span></label>
+
+                            <input type="text" name="postnomRep" ng-model="paysCtrl.country.capital" value="" id="postnomRep" placeholder="saisissez la capitale" class="form-control input-lg">
+                            <span class="help-block"><em></em></span>
+                        </div>
+                        <div>
+                            <input type="submit" value="envoyer" class="btn btn-success" ng-click="paysCtrl.enregistrer(paysCtrl.country)">
+                            <input type="submit" value="modifier" class="btn btn-warning" ng-click="paysCtrl.modifier(paysCtrl.index, paysCtrl.country)">
+                            <input type="reset" value="reinitialiser" class="btn btn-danger" ng-click="paysCtrl.init()"/>
+                        </div>
+                        <p >country={{paysCtrl.country|json}}</p>
+                        <p>contries={{paysCtrl.countries|json}}</p>
+                    </fieldset>
+
+                </form>
+
+            </div>
+
+
+        </div>
+    </body>
+</html>
